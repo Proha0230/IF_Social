@@ -1,0 +1,65 @@
+
+@mixin footer_route($image) {
+  background-image: url($image);
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+@mixin button_notes($image) {
+  background-image: url($image);
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+@mixin optionProfile($height: 55px) {
+  height: $height;
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+  background-color: burlywood;
+}
+
+@mixin mainPages() {
+  width: 100%;
+  background-color: aliceblue;
+  display: flex;
+  overflow: scroll;
+  flex-flow: column;
+  align-items: center;
+}
+
+@mixin buttonStartPage() {
+  padding: 10px;
+  background-color: burlywood;
+  border: solid burlywood 1px;
+  border-radius: 20px;
+}
+
+@mixin startPageInput() {
+  & p {
+    margin: 10px 0 2px 0
+  }
+
+  & input {
+    border-color: burlywood;
+    border-radius: 10px;
+  }
+}
+
+@mixin ErrorOrSuccessMessage($color: red) {
+  height: 50px;
+  width: 280px;
+  border: solid $color 2px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
