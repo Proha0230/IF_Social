@@ -53,9 +53,9 @@
       </div>
 
       <div class="profile_main__notes--input" v-if="newPostOpen">
-        <input></input>
+        <input type="text" v-model="newPostUser"></input>
         <div class="input__button">
-          <button @click="newPostChange(false)">Опубликовать</button>
+          <button @click="postUserPost()" :disabled="newPostUser.length < 5">Опубликовать</button>
           <button @click="newPostChange(false)">Отмена</button>
         </div>
       </div>
@@ -95,10 +95,34 @@ setup() {
 const store = useStore();
 const newPostOpen:Ref<boolean> = ref(false);
 const statusChange:Ref<boolean> = ref(false);
-const statusUserValue:Ref<string> = ref('')
+const statusUserValue:Ref<string> = ref('');
+const newPostUser:Ref<string> = ref('');
+
+
+// Для отправки в бэк нового поста пользователя
 const newPostChange = (status:boolean):void => {
   newPostOpen.value = status
 }
+  type objPost = {
+    date?: string,
+    message?: string,
+    idMessage?: number,
+  }
+const postUserPost = async () => {
+  const obj:objPost = {
+    date: datePost(),
+    message: newPostUser.value,
+    idMessage: store.state.postList ? store.state.postList.length : 0
+  }
+
+  store.commit('addUserPost', obj)
+
+  const body = JSON.stringify({postList: store.state.postList})
+  await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${store.state.UserID}.json`, body)
+  newPostChange(false);
+  newPostUser.value = '';
+}
+//
 
 // Смена статуса пользователя
 const changeStatusUser = async () => {
@@ -142,7 +166,7 @@ onMounted(()=> {
   if(mainPage) mainPage.style.height = `${windowHeight}px`
 })
 
-return{newPostOpen, newPostChange, datePost, store, statusChange, statusChanges, statusUserValue, changeStatusUser, exitUser}
+return{newPostOpen, newPostChange, datePost, store, statusChange, statusChanges, statusUserValue, changeStatusUser, exitUser, newPostUser, postUserPost}
 },
 components: {Header, Footer, AvatarUser}
 
@@ -283,6 +307,10 @@ components: {Header, Footer, AvatarUser}
             align-items: center;
             justify-content: center;
           }
+
+          & button:disabled {
+            background-color: grey;
+          }
         }
 
         & input {
@@ -314,7 +342,10 @@ components: {Header, Footer, AvatarUser}
         padding-bottom: 7vh;
 
         & .list_item {
-          width: 300px;
+          width: 350px;
+          background-color: burlywood;
+          padding: 5px;
+          border-radius: 10px;
 
           & p {
             text-align: start;
@@ -322,6 +353,7 @@ components: {Header, Footer, AvatarUser}
           &__button {
             display: flex;
             justify-content: end;
+            align-items: baseline;
 
             &--edit {
               @include button_notes('../assets/edit_icon.ico');
@@ -329,7 +361,7 @@ components: {Header, Footer, AvatarUser}
 
             &--save {
               @include button_notes('../assets/save_icon.ico');
-              margin: 0 1.5vw;
+              margin: 0 10px;
             }
 
             &--delete {

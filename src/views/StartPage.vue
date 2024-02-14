@@ -108,7 +108,8 @@ export default {
 
       type objPost = {
         date?: string,
-        message?: string
+        message?: string,
+        idMessage?: number,
       }
 
       // Создание даты для автоматической записи о регистрации пользователя
@@ -133,7 +134,7 @@ export default {
             name: nameValue.value,
             lastName: lastNameValue.value,
             status: 'Расскажите как у вас дела?',
-            postList: [{date: datePost(), message: `${nameValue.value} ${lastNameValue.value} Добро пожаловать в IF_Social !`}],
+            postList: [{date: datePost(), message: `${nameValue.value} ${lastNameValue.value} Добро пожаловать в IF_Social !`, idMessage: 0}],
             userID: data.localId
           })
           buttonRegistration.value = true
