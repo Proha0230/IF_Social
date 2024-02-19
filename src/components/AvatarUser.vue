@@ -60,18 +60,20 @@ export default {
 
     // Получение изображения аватара с сервера
     const getImage = async () => {
-      try{
-        imgDataServer.value = await getDownloadURL(storageRef)
-        // Отправка ссылки на изображение с сервера на бэк
-        const body = JSON.stringify({userPhoto: imgDataServer.value})
-        await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${store.state.UserID}/.json`, body)
-      } catch(e){
-        imgDataServer.value = 'https://i.ibb.co/dMqXwmP/no-image.jpg'
-        // Отправка ссылки на изображение с сервера на бэк если у пользователя отсутствует изображение
-        const body = JSON.stringify({userPhoto: 'https://i.ibb.co/dMqXwmP/no-image.jpg'})
-        await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${store.state.UserID}/.json`, body)
+      if (localStorage.getItem('UserID')) {
+        try {
+          imgDataServer.value = await getDownloadURL(storageRef)
+          // Отправка ссылки на изображение с сервера на бэк
+          const body = JSON.stringify({userPhoto: imgDataServer.value})
+          await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${localStorage.getItem('UserID')}/.json`, body)
+        } catch (e) {
+          imgDataServer.value = 'https://i.ibb.co/dMqXwmP/no-image.jpg'
+          // Отправка ссылки на изображение с сервера на бэк если у пользователя отсутствует изображение
+          const body = JSON.stringify({userPhoto: 'https://i.ibb.co/dMqXwmP/no-image.jpg'})
+          await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${localStorage.getItem('UserID')}/.json`, body)
+        }
       }
-    };
+    }
     //
 
     //Получение информации об изображении выбранном пользователем

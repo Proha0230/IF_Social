@@ -83,9 +83,10 @@ export default {
     // Редактирование поста
     const editPostUser = (value:boolean, post?:objPost) => {
       postEdit.value = value;
-      if(post && post.idMessage) {
+      if(post) {
         neededPost.value = postList.value.find(item => item.idMessage === post.idMessage)
       }
+      if(!value) neededPost.value = undefined
     }
     const saveEditPostUser = async () => {
         if(neededPost.value) {
