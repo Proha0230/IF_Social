@@ -21,6 +21,7 @@
 import { ref as refStorage, uploadBytes, getStorage, getDownloadURL } from 'firebase/storage';
 import {onMounted, ref, Ref} from "vue";
 import {useStore} from "vuex";
+import axios from "axios";
 
 export default {
 
@@ -61,8 +62,14 @@ export default {
     const getImage = async () => {
       try{
         imgDataServer.value = await getDownloadURL(storageRef)
+        // Отправка ссылки на изображение с сервера на бэк
+        const body = JSON.stringify({userPhoto: imgDataServer.value})
+        await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${store.state.UserID}/.json`, body)
       } catch(e){
         imgDataServer.value = 'https://i.ibb.co/dMqXwmP/no-image.jpg'
+        // Отправка ссылки на изображение с сервера на бэк если у пользователя отсутствует изображение
+        const body = JSON.stringify({userPhoto: 'https://i.ibb.co/dMqXwmP/no-image.jpg'})
+        await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${store.state.UserID}/.json`, body)
       }
     };
     //

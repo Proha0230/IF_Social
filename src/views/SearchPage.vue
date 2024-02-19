@@ -6,197 +6,15 @@
       <input />
       <button class="search_main__input_search--button">Поиск</button>
     </div>
-    <div class="search_main__user_list">
+    <div class="search_main__user_list" v-for="item in usersList" :key="item">
 
       <div class="search_main__user_list--user">
         <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
+          <img :src="item.userPhoto ?? 'https://i.ibb.co/dMqXwmP/no-image.jpg'" alt="Нет фотографии">
         </div>
         <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
-        </div>
-        <div class="user__button">
-          <div class="user__button--add"></div>
-          <div class="user__button--chat"></div>
-        </div>
-      </div>
-
-      <div class="search_main__user_list--user">
-        <div class="user__photo">
-          <img src="../assets/MyPhoto.jpeg" alt="Фотография отсутствует">
-        </div>
-        <div class="user__info">
-          <h5>Иван</h5>
-          <h5>Иванович</h5>
+          <h5>{{ item.name }}</h5>
+          <h5>{{ item.lastName }}</h5>
         </div>
         <div class="user__button">
           <div class="user__button--add"></div>
@@ -214,22 +32,45 @@
 
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import {onMounted} from "vue";
+import {onMounted, Ref, ref} from "vue";
+import axios from "axios";
 
 export default {
 
   setup() {
+    type UserRegValue = {
+      email: string,
+      password: string,
+      name: string,
+      lastName: string,
+      status: string,
+      postList: Array<objPost>
+      userID: string
+      userPhoto?: string | null;
+    }
 
+    type objPost = {
+      date?: string,
+      message?: string,
+      idMessage?: number,
+    }
 
+    const usersList:Ref<Array<UserRegValue> | null> = ref(null);
 
+    // Получение данных о списке пользователей c эндпоинта
+    const getDataUsersList = async ():Promise<void> => {
+      const {data} = await axios.get(`https://ifsocial0230-default-rtdb.firebaseio.com/users/.json`)
+      usersList.value = data
+    }
 
-    onMounted(()=> {
+    onMounted(async ()=> {
       const windowHeight = window.innerHeight - 100;
       const mainPage: HTMLElement | null = document.querySelector('.search_main')
       if(mainPage) mainPage.style.height = `${windowHeight}px`
+      await getDataUsersList();
     })
 
-    return{}
+    return{usersList}
 
   },
   components: {Header, Footer}
