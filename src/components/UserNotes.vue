@@ -82,6 +82,7 @@ export default {
 
     // Редактирование поста
     const editPostUser = (value:boolean, post?:objPost) => {
+      postList.value = store.state.postList
       postEdit.value = value;
       if(post) {
         neededPost.value = postList.value.find(item => item.idMessage === post.idMessage)
