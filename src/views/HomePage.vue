@@ -36,7 +36,7 @@
 
       <div class="profile_main__profile_options_list--friends">
       <div class="friends__icon"></div>
-      <p class="friends__name">Мои друзья</p>
+      <p class="friends__name" @click="goTo('/friends')">Мои друзья</p>
       </div>
 
     </div>
@@ -55,6 +55,7 @@ import AvatarUser from "@/components/AvatarUser.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import {Ref, ref } from 'vue'
 import { onMounted } from 'vue';
+import {useRouter} from "vue-router";
 import { useStore } from 'vuex';
 import axios from "axios";
 import router from "@/router";
@@ -63,8 +64,13 @@ export default {
 
 setup() {
 const store = useStore();
+const router = useRouter();
 const statusChange:Ref<boolean> = ref(false);
 const statusUserValue:Ref<string> = ref('');
+
+  const goTo = (value:string):void => {
+    router.push(value)
+  }
 
 // Смена статуса пользователя
 const changeStatusUser = async () => {
@@ -99,7 +105,7 @@ onMounted(()=> {
   if(mainPage) mainPage.style.height = `${windowHeight}px`
 })
 
-return{store, statusChange, statusChanges, statusUserValue, changeStatusUser, exitUser}
+return{store, statusChange, statusChanges, statusUserValue, changeStatusUser, exitUser, goTo}
 },
 components: {Header, Footer, AvatarUser, UserNotes}
 

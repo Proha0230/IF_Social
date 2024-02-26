@@ -17,7 +17,7 @@
           <h5>{{ item.lastName }}</h5>
         </div>
         <div class="user__button">
-          <div class="user__button--add"></div>
+          <div class="user__button--add" @click="inviteFriends(item.userID)"></div>
           <div class="user__button--chat"></div>
         </div>
       </div>
@@ -34,6 +34,7 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import {onMounted, Ref, ref} from "vue";
 import axios from "axios";
+import {useStore} from "vuex";
 
 export default {
 
@@ -47,6 +48,7 @@ export default {
       postList: Array<objPost>
       userID: string
       userPhoto?: string | null;
+      friends: friends
     }
 
     type objPost = {
@@ -55,7 +57,40 @@ export default {
       idMessage?: number,
     }
 
+    type friendInList = {
+      userID: string,
+      message: Array<string>
+    }
+
+    type friends = {
+      inviteFriends: Array<string>,
+      friendList: Array<friendInList>
+    }
+
+    const store = useStore()
     const usersList:Ref<Array<UserRegValue> | null> = ref(null);
+
+    // Заявка на добавление в друзья
+    const inviteFriends = async (userID:string) => {
+      if(store.state.UserID !== userID) {
+        const {data} = await axios.get(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${userID}/friends.json`)
+        const friendsUser:friends = data
+        if(!friendsUser.inviteFriends.find(item => item === store.state.UserID)) {
+            friendsUser.inviteFriends.push(store.state.UserID)
+            const body = JSON.stringify({friends: friendsUser})
+            await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${userID}.json`, body)
+        } else console.log('Ваша заявка уже была отправлена')
+      } else console.log('Нельзя добавить самого себя в друзья!')
+      //       const friends:friends = {
+      //         inviteFriends:[''],
+      //         friendList: [{
+      //           userID: '',
+      //           message: ['']
+      //         }]
+      //       }
+      //       const body = JSON.stringify({friends: friends})
+      //       await axios.patch(`https://ifsocial0230-default-rtdb.firebaseio.com/users/${userID}.json`, body)
+    }
 
     // Получение данных о списке пользователей c эндпоинта
     const getDataUsersList = async ():Promise<void> => {
@@ -70,7 +105,7 @@ export default {
       await getDataUsersList();
     })
 
-    return{usersList}
+    return{usersList, inviteFriends}
 
   },
   components: {Header, Footer}

@@ -46,6 +46,7 @@
       </div>
       <div class="main_login__form--button Registration">
         <button class="button__reg" :disabled="buttonRegistration" @click="CreateNewUser">Регистрация</button>
+        <button class="button__reg" @click="goReg = !goReg">Назад</button>
       </div>
     </div>
 
@@ -85,6 +86,7 @@ export default {
         store.state.UserLastName = data.lastName;
         store.state.status = data.status;
         store.state.postList = data.postList;
+        store.state.friends = data.friends
       }
       //
 
@@ -96,6 +98,16 @@ export default {
 
 
       // Для регистрации аккаунта
+      type friendInList = {
+        userID: string,
+        message: Array<string>
+      }
+
+      type friends = {
+        inviteFriends: Array<string>,
+        friendList: Array<friendInList>
+      }
+
       type UserRegValue = {
         email: string,
         password: string,
@@ -103,7 +115,8 @@ export default {
         lastName: string,
         status: string,
         postList: Array<objPost>
-        userID: string
+        userID: string,
+        friends: friends
       }
 
       type objPost = {
@@ -135,7 +148,14 @@ export default {
             lastName: lastNameValue.value,
             status: 'Расскажите как у вас дела?',
             postList: [{date: datePost(), message: `${nameValue.value} ${lastNameValue.value} Добро пожаловать в IF_Social !`, idMessage: 0}],
-            userID: data.localId
+            userID: data.localId,
+            friends: {
+              inviteFriends:[''],
+              friendList: [{
+                userID: '',
+                message: ['']
+              }]
+            }
           })
           buttonRegistration.value = true
           successNewAccount.value = 'Регистрация завершена!'
@@ -244,7 +264,7 @@ export default {
         margin-top: 15px;
 
         &.Registration {
-          justify-content: center;
+          justify-content: space-between;
         }
 
         & .button__enter {

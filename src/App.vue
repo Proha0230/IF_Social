@@ -36,6 +36,9 @@ onBeforeMount(()=> {
     getDataUser();
     router.push('/home');
   }
+  if(!UserID.value && !UserEnter.value) {
+    router.push('/');
+  }
 })
 
   }

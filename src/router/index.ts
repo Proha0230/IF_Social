@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import SearchPage from "@/views/SearchPage.vue";
 import ChatPage from "@/views/ChatPage.vue";
 import StartPage from "@/views/StartPage.vue";
+import FriendsUser from "@/views/FriendsUser.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/chat',
     name: 'chat',
     component: ChatPage
+  },
+  {
+    path: '/friends',
+    name: 'friends',
+    component: FriendsUser
   },
   // {
   //   path: '/about',

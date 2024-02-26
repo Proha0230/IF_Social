@@ -5,6 +5,15 @@ type objPost = {
   message?: string,
   idMessage?: number | null,
 }
+type friendInList = {
+  userID: string,
+  message: Array<string>
+} | null
+
+type friends = {
+  inviteFriends: Array<string>,
+  friendList: Array<friendInList>
+}
 export default createStore({
   state: {
     UserID: '',
@@ -19,6 +28,10 @@ export default createStore({
       message: '',
       idMessage: null,
     }),
+    friends: {
+      inviteFriends: Array<string>(''),
+      friendList: Array<friendInList>({userID:'', message: ['']})
+    } as friends
   },
   getters: {
   },
